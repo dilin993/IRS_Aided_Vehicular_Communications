@@ -1,2 +1,2 @@
-# IRS_Aided_Vehicular_Communications
+# IRS Aided Vehicula Communications
 Simulations on IRS aided vehicular communications
