@@ -72,15 +72,13 @@ hold on;
 n=1:iteration_count+1;
 plot(n,history_256_zero(:,1),'o--','LineWidth',1.5);
 plot(n,history_64_zero(:,1),'o--','LineWidth',1.5);
-% plot(n,history_256_rand(:,1),'o--','LineWidth',1.5);
-% plot(n,history_64_rand(:,1),'o--','LineWidth',1.5);
+plot(n,history_256_rand(:,1),'o--','LineWidth',1.5);
+plot(n,history_64_rand(:,1),'o--','LineWidth',1.5);
 hold off;
 grid on;
 xlabel('iteration');
 ylabel('objective value');
-legend('IRS(256) zero initializaion','IRS(64) zero initializaion',...
-    'Location','best');
-%     'IRS(256) random initializaion','IRS(64) random initializaion',...
+legend('IRS(256) obj value','IRS(64) obj value','Location','best');
 title('Convergence of phase optimization algorithm');
 print(gcf,'convergence.png','-dpng','-r400');
 % date = datestr(now,'YYYY.mm.dd.HH.MM');
@@ -99,7 +97,7 @@ function [history] = simulate(bs, irs, car,sim)
     
     [~,~,history] = optimal_phase_shift(h_d, H_r, h_v,...
         sim.error_th,sim.sigma_n_sqr,sim.p_sig, sim.iteration_count,...
-        sim.L,sim.early_stop,sim.random_initilization);
+        sim.L,sim.early_stop);
 end
 
 

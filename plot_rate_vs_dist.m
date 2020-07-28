@@ -17,10 +17,11 @@ sigma_sqr = 0.5; % Variance of Rician distribution
 L=8; % number of discrete levels
 early_stop = 1;
 iteration_count = 100;
+random_initilization = 0;
 
 sim = simulation(sigma_n_sqr_dBm, gamma_th_dB,p_sig_dBm, n_trials,...
     fc, error_th, n_angle_realizations, path_loss_enabled, K_r,...
-    K_c, sigma_sqr,iteration_count, L,early_stop);
+    K_c, sigma_sqr,iteration_count, L,early_stop,random_initilization);
 
 % define IRS
 pos_irs = [0;0;1];
@@ -112,7 +113,8 @@ simulate(bs, irs, car_points, sim)
         % passive beamforming with full CSI
         [~,R_irs_full(i)] = optimal_phase_shift2(h_d, H_r, h_v,...
         sim.error_th,sim.sigma_n_sqr,sim.p_sig, sim.K_r, sim.K_c,...
-        irs.Ny, irs.Nz, sim.iteration_count, sim.L, sim.early_stop);
+        irs.Ny, irs.Nz, sim.iteration_count, sim.L, sim.early_stop,...
+        sim.random_initilization);
         R_nirs(i)=achievable_rate(h_d, sim.sigma_n_sqr,sim.p_sig);
     end
 end

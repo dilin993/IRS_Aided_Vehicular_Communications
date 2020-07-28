@@ -1,9 +1,10 @@
 function [v, R] = optimal_phase_shift3(h_d, H_r, h_v, error_th,...
-    sigma_n_sqr, p_sig, K_r, K_c, N_r, N_c, iteration_count, L, early_stop)
+    sigma_n_sqr, p_sig, K_r, K_c, N_r, N_c, iteration_count, L,...
+    early_stop,random_initilization)
 
 if K_r==1 && K_c==1
     [v,R] = optimal_phase_shift(h_d, H_r, h_v, error_th, sigma_n_sqr,...
-    p_sig, iteration_count, L, early_stop);
+    p_sig, iteration_count, L, early_stop,random_initilization);
     return;
 end
 
@@ -19,7 +20,7 @@ for i=1:size(H_r,1)
 end
 
 [v1,~,~] = optimal_phase_shift(h_d, H_r1, h_v1, error_th, sigma_n_sqr,...
-    p_sig, iteration_count, L, early_stop);
+    p_sig, iteration_count, L, early_stop,random_initilization);
 v1_exp = reshape(v1,N_r/K_r,N_c/K_c);
 v = reshape(imresize(v1_exp,[N_r,N_c]),N_r*N_c,1);
 v = exp(1i*angle(v));
