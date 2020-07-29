@@ -111,7 +111,7 @@ plot(p_sig_dBm, R_irs_2bit,'-','LineWidth',1.5);
 plot(p_sig_dBm, R_nirs,'--','LineWidth',1.5);
 hold off;
 grid on;
-xlabel('Tx Power(dBm)');
+xlabel('Tx Power (dBm)');
 ylabel('Achievable Rate (bits/s/Hz)');
 legend('3 bit phase shifts','2 bit phase shifts','1 bit phase shifts',...
        'without IRS','Location','best');

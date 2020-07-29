@@ -76,10 +76,10 @@ plot(n,history_64_zero(:,1),'o--','LineWidth',1.5);
 % plot(n,history_64_rand(:,1),'o--','LineWidth',1.5);
 hold off;
 grid on;
+xlim([1,iteration_count+1]);
 xlabel('iteration');
 ylabel('objective value');
-legend('IRS(256) zero initializaion','IRS(64) zero initializaion',...
-    'Location','best');
+legend('IRS(256)','IRS(64)','Location','best');
 %     'IRS(256) random initializaion','IRS(64) random initializaion',...
 title('Convergence of phase optimization algorithm');
 print(gcf,'convergence.png','-dpng','-r400');
