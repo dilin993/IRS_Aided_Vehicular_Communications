@@ -75,7 +75,7 @@ R_irs_64_sub = zeros(num_points,1);
 R_nirs = zeros(num_points,1);
 
 
-for j=1:sim1.angle_realizations
+parfor j=1:sim1.angle_realizations
     fprintf('Iterating angle realization %d\n', j);
     for n=1:sim1.n_trials
         [R_irs_256_1_full, R_irs_256_1, R_nirs_1] = simulate(...
@@ -115,7 +115,7 @@ R_irs_64_full_sub = R_irs_64_full_sub/(sim1.n_trials*sim1.angle_realizations);
 R_irs_256_sub = R_irs_256_sub/(sim1.n_trials*sim1.angle_realizations);
 R_irs_64_sub = R_irs_64_sub/(sim1.n_trials*sim1.angle_realizations);
 R_nirs = R_nirs/(sim1.n_trials*sim1.angle_realizations);
-save('data_txpower2');
+save('data_txpower3');
 
 %%
 fig1 = figure;
@@ -126,18 +126,22 @@ plot(p_sig_dBm, R_irs_256,'--','LineWidth',1.5);
 plot(p_sig_dBm, R_irs_64,'--','LineWidth',1.5);
 plot(p_sig_dBm, R_irs_256_full_sub,'-','LineWidth',1.5);
 plot(p_sig_dBm, R_irs_64_full_sub,'-','LineWidth',1.5);
-plot(p_sig_dBm, R_irs_256_sub,'--','LineWidth',1.5);
-plot(p_sig_dBm, R_irs_64_sub,'--','LineWidth',1.5);
+% plot(p_sig_dBm, R_irs_256_sub,'--','LineWidth',1.5);
+% plot(p_sig_dBm, R_irs_64_sub,'--','LineWidth',1.5);
 plot(p_sig_dBm, R_nirs,'--','LineWidth',1.5);
 hold off;
 grid on;
 xlabel('Tx Power(dBm)');
 ylabel('Achievable Rate (bits/s/Hz)');
+% legend('with IRS(256) full CSI','with IRS(64) full CSI', ...
+%     'with IRS(256) LoS','with IRS(64) LoS',...
+%     'with IRS(256) full CSI subgroups','with IRS(64) full CSI subgroups', ...
+%     'with IRS(256) LoS subgroups','with IRS(64) LoS subgroups',...
+%     'without IRS','Location','best');
 legend('with IRS(256) full CSI','with IRS(64) full CSI', ...
-    'with IRS(256) LoS','with IRS(64) LoS',...
-    'with IRS(256) full CSI subgroups','with IRS(64) full CSI subgroups', ...
-    'with IRS(256) LoS subgroups','with IRS(64) LoS subgroups',...
-    'without IRS','Location','best');
+       'with IRS(256) position based','with IRS(64) position based',...
+       'with IRS(256) 2x2 grouping','with IRS(64) 2x2 grouping',...
+       'without IRS','Location','best');
 title('Achievable Rate with Transmit Power');
 % date = datestr(now,'YYYY.mm.dd.HH.MM');
 print(gcf,'achievable_rate_vs_txpower_all.png','-dpng','-r400');
